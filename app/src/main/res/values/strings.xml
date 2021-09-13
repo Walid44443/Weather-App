@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Weather</string>
+    <string name="write_cities_names"><![CDATA[Write cities or city name seprated by comma to view more details about forcasting & weather details]]></string>
+    <string name="btn_select">Select</string>
 </resources>

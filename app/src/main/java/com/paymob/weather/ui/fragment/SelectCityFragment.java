@@ -14,6 +14,8 @@ import android.view.ViewGroup;
 
 import com.paymob.weather.R;
 
+import org.jetbrains.annotations.NotNull;
+
 public class SelectCityFragment extends Fragment {
 
     private SelectCityViewModel mViewModel;
@@ -29,10 +31,9 @@ public class SelectCityFragment extends Fragment {
     }
 
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
+    public void onViewCreated(@NonNull @NotNull View view, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
         mViewModel = new ViewModelProvider(this).get(SelectCityViewModel.class);
-        // TODO: Use the ViewModel
-    }
 
+    }
 }
