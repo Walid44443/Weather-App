@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="cityWeather"
+            type="com.paymob.weather.data.model.response.CityWeather" />
+
+        <import type="com.paymob.weather.util.DateUtil" />
+        <import type="com.paymob.weather.util.TempConverterUtil" />
+    </data>
+    <androidx.cardview.widget.CardView
+        android:layout_width="@dimen/item_hour_forecasting_for_today_layout_width"
+        android:layout_height="@dimen/item_hour_forecasting_for_today_layout_height"
+        android:layout_marginHorizontal="@dimen/_5sdp"
+        android:layout_marginVertical="@dimen/_8sdp"
+        app:cardElevation="4dp"
+        app:cardBackgroundColor="@color/main_screen_card_color_not_selected"
+        app:cardCornerRadius="@dimen/_10sdp">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:weightSum="10">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="6"
+                android:padding="@dimen/_10sdp"
+                android:src="@drawable/ic_cloudy_with_sun" />
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="4"
+                android:orientation="vertical"
+                android:paddingVertical="@dimen/_10sdp"
+                android:paddingStart="@dimen/_10sdp"
+                android:paddingEnd="@dimen/_5sdp">
+
+                <TextView
+                    android:id="@+id/hour_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="monospace"
+                    android:lines="1"
+                    android:text="@{DateUtil.INSTANCE.todayForecastingHourCard(cityWeather.dtTxt)}"
+                    android:maxLines="1"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_9ssp"
+                    tools:text="10:00" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center">
+
+                    <TextView
+                        android:id="@+id/degree_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:lines="1"
+                        android:maxLines="1"
+                        android:text="@{TempConverterUtil.INSTANCE.toRoundedCelsius(cityWeather.main.temp)}"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_20ssp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="32" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="monospace"
+                        android:lines="1"
+                        android:maxLines="1"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_9ssp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toEndOf="@+id/degree_text"
+                        app:layout_constraintTop_toTopOf="@+id/degree_text"
+                        tools:text="°C" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+        </androidx.appcompat.widget.LinearLayoutCompat>
+    </androidx.cardview.widget.CardView>
+</layout>

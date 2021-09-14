@@ -7,8 +7,20 @@
 
     <fragment
         android:id="@+id/selectCityFragment"
-        android:name="com.paymob.weather.ui.fragment.SelectCityFragment"
+        android:name="com.paymob.weather.ui.fragment.select_city.SelectCityFragment"
         android:label="select_city_fragment"
         tools:layout="@layout/select_city_fragment" />
+
+
+    <fragment
+        android:id="@+id/cityWeatherFragment"
+        android:name="com.paymob.weather.ui.fragment.weatherList.CityWeatherFragment"
+        tools:layout="@layout/city_weather_fragment">
+        <argument
+            android:name="cities"
+            app:argType="string"
+            app:nullable="true" />
+    </fragment>
+
 
 </navigation>

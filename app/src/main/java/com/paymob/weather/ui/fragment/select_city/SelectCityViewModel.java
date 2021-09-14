@@ -1,4 +1,4 @@
-package com.paymob.weather.ui.fragment;
+package com.paymob.weather.ui.fragment.select_city;
 
 import androidx.lifecycle.ViewModel;
 

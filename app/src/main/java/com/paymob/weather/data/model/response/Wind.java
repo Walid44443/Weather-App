@@ -8,7 +8,7 @@ public class Wind{
 	private int deg;
 
 	@SerializedName("speed")
-	private int speed;
+	private float speed;
 
 	@SerializedName("gust")
 	private double gust;
@@ -25,7 +25,7 @@ public class Wind{
 		this.speed = speed;
 	}
 
-	public int getSpeed(){
+	public float getSpeed(){
 		return speed;
 	}
 

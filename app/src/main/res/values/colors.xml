@@ -15,4 +15,11 @@
     <color name="def_btn_color">#075AA9</color>
     <color name="text_color_white_only">@color/white</color>
     <color name="material_color_black">@color/black</color>
+
+    <color name="main_screen_bg_color">#686bcc</color>
+    <color name="main_screen_card_color_not_selected">#7077df</color>
+    <color name="main_screen_card_color_selected">#4b4e9d</color>
+    <color name="card_bg_color">#6D71E0</color>
+
+
 </resources>

@@ -1,4 +1,4 @@
-package com.paymob.weather.data.network;
+package com.paymob.weather.data.network.core;
 
 import com.paymob.weather.util.CONST;
 

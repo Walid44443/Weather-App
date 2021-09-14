@@ -1,79 +1,105 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.fragment.SelectCityFragment">
-
-
-    <!---        Start background         -->
-    <View
-        android:id="@+id/view"
+    xmlns:tools="http://schemas.android.com/tools">
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:alpha="0.0"
-        android:background="@color/purple_500" />
+        android:fillViewport="true">
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:alpha="0.2"
-        android:scaleType="centerCrop"
-        android:src="@drawable/ic_choose_city_bg"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-    <!---        End background         -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:context=".ui.fragment.select_city.SelectCityFragment">
+            <!---        Start background         -->
+            <View
+                android:id="@+id/view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:alpha="0.0"
+                android:background="@color/purple_500" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:alpha="0.2"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_choose_city_bg"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+            <!---        End background         -->
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="@dimen/_150sdp"
+                android:layout_height="@dimen/_150sdp"
+                android:layout_marginHorizontal="@dimen/_30sdp"
+                android:src="@drawable/ic_weather_select_city"
+                app:layout_constraintBottom_toTopOf="@+id/appCompatTextView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/appCompatTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_20sdp"
+                android:layout_marginBottom="@dimen/_30sdp"
+                android:gravity="start"
+                android:shadowColor="@color/black"
+                android:shadowDx="0"
+                android:shadowDy="0.1"
+                android:text="@string/write_cities_names"
+                android:textSize="@dimen/_17ssp"
+                app:layout_constraintBottom_toTopOf="@+id/appCompatEditText"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
 
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:layout_width="@dimen/_150sdp"
-        android:layout_height="@dimen/_150sdp"
-        android:layout_marginHorizontal="@dimen/_30sdp"
-        android:src="@drawable/ic_weather_select_city"
-        app:layout_constraintBottom_toTopOf="@+id/appCompatTextView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/view" />
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/appCompatEditText"
+                android:layout_width="@dimen/_240sdp"
+                android:layout_height="@dimen/_45sdp"
+                android:layout_marginHorizontal="@dimen/_10sdp"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.55">
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/appCompatTextView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/_20sdp"
-        android:layout_marginVertical="@dimen/_5sdp"
-        android:gravity="start"
-        android:shadowColor="@color/black"
-        android:shadowDx="0dp"
-        android:shadowDy="-1dp"
-        android:text="@string/write_cities_names"
-        android:textSize="@dimen/_17ssp"
-        app:layout_constraintBottom_toTopOf="@+id/appCompatEditText"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+                <EditText
+                    android:id="@+id/cities_edt"
+                    style="@style/editText"
+                    android:layout_width="@dimen/_180sdp"
+                    android:layout_height="@dimen/_45sdp"
+                    android:layout_marginHorizontal="@dimen/_5sdp"
+                    android:hint="@string/enter_city_name_hint" />
 
-    <androidx.appcompat.widget.AppCompatEditText
-        android:id="@+id/appCompatEditText"
-        android:layout_width="@dimen/_240sdp"
-        android:layout_height="@dimen/_45sdp"
-        android:layout_marginHorizontal="@dimen/_10sdp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.65999997" />
+                <ImageView
+                    android:id="@+id/current_location"
+                    style="@style/editText"
+                    android:layout_width="@dimen/_45sdp"
+                    android:layout_height="@dimen/_45sdp"
+                    android:layout_marginHorizontal="@dimen/_5sdp"
+                    android:hint="@string/enter_city_name_hint"
+                    android:src="@drawable/ic_location" />
+            </androidx.appcompat.widget.LinearLayoutCompat>
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_login"
-        style="@style/DefaultButton"
-        android:background="@drawable/default_button_bg_selector"
-        android:fontFamily="@font/default_medium"
-        android:text="@string/btn_select"
-        android:layout_marginVertical="@dimen/_10sdp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/appCompatEditText" />
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_login"
+                style="@style/DefaultButton"
+                android:layout_marginTop="@dimen/_40sdp"
+                android:background="@drawable/default_button_bg_selector"
+                android:fontFamily="@font/default_medium"
+                android:text="@string/btn_select"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/appCompatEditText" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+</layout>
