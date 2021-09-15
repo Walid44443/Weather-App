@@ -53,6 +53,7 @@
                     android:lines="1"
                     android:maxLines="1"
                     android:text="@{cityName}"
+                    android:textAllCaps="true"
                     android:textColor="@color/white"
                     android:textSize="@dimen/_30ssp"
                     android:textStyle="bold"
@@ -70,6 +71,7 @@
                     android:alpha="0.7"
                     android:lines="1"
                     android:maxLines="1"
+                    android:text="@{DateUtil.INSTANCE.dateInDetailsDialog(cityWeather.dtTxt)}"
                     android:textColor="@color/white"
                     android:textSize="@dimen/_15ssp"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -103,6 +105,7 @@
                     tools:text="Clear Cloud" />
 
                 <androidx.appcompat.widget.LinearLayoutCompat
+                    android:id="@+id/box_details"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_50sdp"
                     android:orientation="horizontal"
@@ -246,6 +249,19 @@
 
                 </androidx.appcompat.widget.LinearLayoutCompat>
 
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/hourly_recyclerview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fitsSystemWindows="true"
+                    android:nestedScrollingEnabled="false"
+                    android:visibility="visible"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintTop_toBottomOf="@id/box_details"
+                    tools:itemCount="10"
+                    tools:listitem="@layout/item_hour_forecasting_for_today_layout"
+                    tools:orientation="horizontal"
+                    tools:visibility="visible" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.cardview.widget.CardView>

@@ -9,11 +9,13 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.paymob.weather.R;
+import com.paymob.weather.data.model.response.City;
 import com.paymob.weather.data.model.response.CityWeather;
 import com.paymob.weather.data.network.repo.WeatherForecastingRepo;
 import com.paymob.weather.databinding.CityWeatherFragmentBinding;
@@ -22,11 +24,13 @@ import com.paymob.weather.util.ItemClickListener;
 import com.paymob.weather.util.NavControllerGetter;
 
 import java.util.HashMap;
+import java.util.List;
 
-public class CityWeatherFragment extends Fragment implements ItemClickListener<CityWeather> {
+public class CityWeatherFragment extends Fragment implements ItemClickListener<List<CityWeather>> {
 
     private CityWeatherViewModel mViewModel;
     private CityWeatherFragmentBinding binding;
+    private City city = null;
 
     public static CityWeatherFragment newInstance() {
         return new CityWeatherFragment();
@@ -45,6 +49,7 @@ public class CityWeatherFragment extends Fragment implements ItemClickListener<C
         super.onViewCreated(view, savedInstanceState);
         mViewModel = new ViewModelProvider(this).get(CityWeatherViewModel.class);
 
+        city = getArguments().getParcelable("city");
 
         // set layout manger as linear to display items as a vertical view
         LinearLayoutManager forecastingLinearLayoutManager = new LinearLayoutManager(
@@ -61,7 +66,7 @@ public class CityWeatherFragment extends Fragment implements ItemClickListener<C
         binding.forecastingRecyclerview.setAdapter(forecastingAdapter);
 
 
-        WeatherForecastingRepo forecastingRepo = new WeatherForecastingRepo("Cairo");
+        WeatherForecastingRepo forecastingRepo = new WeatherForecastingRepo(city);
         forecastingRepo.fetchFromNetwork();
         forecastingRepo.getResultLive().observe(getViewLifecycleOwner(), resource -> {
             switch (resource.component1()) {
@@ -82,10 +87,13 @@ public class CityWeatherFragment extends Fragment implements ItemClickListener<C
 
 
     @Override
-    public void onClick(@Nullable CityWeather item, @Nullable View view) {
+    public void onClick(@Nullable List<CityWeather> item, @Nullable View view) {
         Bundle bundle = new Bundle();
-        bundle.putParcelable("city", item);
-        bundle.putString("cityName", "Cairo");
+        CityWeather[] cityWeathers = new CityWeather[item.size()];
+        item.toArray(cityWeathers); // fill the array
+
+        bundle.putParcelableArray("cityWeatherList", cityWeathers);
+        bundle.putString("cityName", city.getName());
         ((NavControllerGetter) requireActivity()).getHomeNavController().navigate(R.id.dayForecastingDetailsDialogFragment, bundle);
     }
 }

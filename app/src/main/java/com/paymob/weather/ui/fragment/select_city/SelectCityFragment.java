@@ -2,6 +2,7 @@ package com.paymob.weather.ui.fragment.select_city;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.RequiresApi;
 import androidx.core.app.ActivityCompat;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -29,6 +30,7 @@ import com.paymob.weather.data.model.response.Coord;
 import com.paymob.weather.databinding.SelectCityFragmentBinding;
 import com.paymob.weather.ui.fragment.select_city.adapter.SelectedCitiesAdapter;
 import com.paymob.weather.util.NavControllerGetter;
+import com.paymob.weather.util.PermissionUtil;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -90,18 +92,6 @@ public class SelectCityFragment extends Fragment implements View.OnClickListener
 
     }
 
-    private ActivityResultLauncher<String> requestPermissionLauncher =
-            registerForActivityResult(new ActivityResultContracts.RequestPermission(), isGranted -> {
-                if (isGranted) {
-                    getAndAddCurrentCity();
-                } else {
-                    // Explain to the user that the feature is unavailable because the
-                    // features requires a permission that the user has denied. At the
-                    // same time, respect the user's decision. Don't link to system
-                    // settings in an effort to convince the user to change their
-                    // decision.
-                }
-            });
 
     @Override
     public void onClick(View view) {
@@ -117,7 +107,7 @@ public class SelectCityFragment extends Fragment implements View.OnClickListener
                     bundle.putParcelableArray("cities", citiesArray);
                     ((NavControllerGetter) requireActivity())
                             .getHomeNavController()
-                            .navigate(R.id.cityWeatherFragment,
+                            .navigate(R.id.weatherContainerFragment,
                                     bundle
                             );
                 } else
@@ -128,34 +118,58 @@ public class SelectCityFragment extends Fragment implements View.OnClickListener
                 binding.citiesEdt.setText("");
                 break;
             case R.id.current_location:
-                getAndAddCurrentCity();
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    getAndAddCurrentCity();
+                }
                 break;
         }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     private void getAndAddCurrentCity() {
-        if (ActivityCompat.checkSelfPermission(requireContext(),
-                Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
-                && ActivityCompat.checkSelfPermission(requireContext(),
-                Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+        PermissionUtil.checkPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION,
+                new PermissionUtil.PermissionAskListener() {
+                    @Override
+                    public void onPermissionAsk() {
+                        ActivityCompat.requestPermissions(
+                                getActivity(),
+                                new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION}, 3000
+                        );
+                    }
 
-            fusedLocationClient.getLastLocation()
-                    .addOnSuccessListener(getActivity(), location -> {
-                        if (location != null) {
-                            City city = new City();
-                            Coord coord = new Coord();
-                            coord.setLat(location.getLatitude());
-                            coord.setLon(location.getLongitude());
-                            city.setCoord(coord);
-                            List<City> newCitiesList = mViewModel.listLiveData.getValue();
-                            newCitiesList.add(city);
-                            mViewModel.listLiveData.postValue(newCitiesList);
-                        }
-                    });
-        } else {
-            requestPermissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION);
-            requestPermissionLauncher.launch(Manifest.permission.ACCESS_COARSE_LOCATION);
-        }
+                    @Override
+                    public void onPermissionPreviouslyDenied() {
+                        //show a dialog explaining permission and then request permission
+                    }
+
+                    @Override
+                    public void onPermissionDisabled() {
+                        Toast.makeText(getContext(), "Permission Disabled.", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onPermissionGranted() {
+                        fusedLocationClient.getLastLocation()
+                                .addOnSuccessListener(getActivity(), location -> {
+                                    if (location != null) {
+                                        for (City city : mViewModel.listLiveData.getValue()) {
+                                            if (city.getCoord() != null)
+                                                return;
+                                        }
+                                        City city = new City();
+                                        Coord coord = new Coord();
+                                        coord.setLat(location.getLatitude());
+                                        coord.setLon(location.getLongitude());
+                                        city.setCoord(coord);
+                                        List<City> newCitiesList = mViewModel.listLiveData.getValue();
+                                        newCitiesList.add(city);
+
+                                        mViewModel.listLiveData.postValue(newCitiesList);
+                                    }
+                                });
+                    }
+                });
+
     }
 
     private void addCities(String cities) {
@@ -163,7 +177,7 @@ public class SelectCityFragment extends Fragment implements View.OnClickListener
         List<City> newCitiesList = mViewModel.listLiveData.getValue();
         for (String cityString : citesArr) {
             City city = new City();
-            city.setName(cityString);
+            city.setName(cityString.trim());
             if (newCitiesList.size() < 7)
                 newCitiesList.add(city);
         }

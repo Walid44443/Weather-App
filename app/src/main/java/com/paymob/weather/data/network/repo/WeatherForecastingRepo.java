@@ -3,6 +3,7 @@ package com.paymob.weather.data.network.repo;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.MutableLiveData;
 
+import com.paymob.weather.data.model.response.City;
 import com.paymob.weather.data.model.response.CityForecastResponse;
 import com.paymob.weather.data.model.response.CityWeather;
 import com.paymob.weather.util.CONST;
@@ -18,21 +19,29 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class WeatherForecastingRepo extends Repository<HashMap<Date, List<CityWeather>>> {
-    private String cityName;
+    private City city;
 
-    public WeatherForecastingRepo(String cityName) {
-        this.cityName = cityName;
+    public WeatherForecastingRepo(City city) {
+        this.city = city;
         fetchFromNetwork();
     }
 
     @Override
     public void fetchFromNetwork() {
         GroupWeatherDatesByDay groupWeatherDatesByDay = new GroupWeatherDatesByDay();
-        Call<CityForecastResponse> call =
-                super.getApiInterface()
-                        .getApi()
-                        .getWeatherResponseForCity(cityName, CONST.API_ID,"metric");
-
+        Call<CityForecastResponse> call = null;
+        if (city.getName() != null) {
+            call = super.getApiInterface()
+                    .getApi()
+                    .getWeatherResponseForCityByName(city.getName(), CONST.API_ID, "metric");
+        } else {
+            call = super.getApiInterface()
+                    .getApi()
+                    .getWeatherResponseForCityByLocation(
+                            city.getCoord().getLat(),
+                            city.getCoord().getLon(),
+                            CONST.API_ID, "metric");
+        }
         call.enqueue(new Callback<CityForecastResponse>() {
             @Override
             public void onResponse(Call<CityForecastResponse> call, Response<CityForecastResponse> response) {
@@ -41,8 +50,16 @@ public class WeatherForecastingRepo extends Repository<HashMap<Date, List<CityWe
                             .postValue(
                                     Resource.Companion.success(groupWeatherDatesByDay.parseTimeStamps(response.body().getList())));
                 else
-                    WeatherForecastingRepo.super.getResult()
-                            .postValue(Resource.Companion.error("Error Code :" + response.code(), null));
+                    switch (response.code()) {
+                        case 404:
+                            WeatherForecastingRepo.super.getResult()
+                                    .postValue(Resource.Companion.error("" + response.code(), null));
+                            break;
+                        default:
+                            WeatherForecastingRepo.super.getResult()
+                                    .postValue(Resource.Companion.error("Error Code :" + response.code(), null));
+                            break;
+                    }
             }
 
             @Override

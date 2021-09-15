@@ -11,7 +11,7 @@ data class CityWeather(
     var dt: Long = 0,
 
     @SerializedName("pop")
-    var pop: Long = 0,
+    var pop: Double = 0.0,
 
     @SerializedName("visibility")
     var visibility: Int = 0,

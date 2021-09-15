@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/main_screen_bg_color"
+        android:orientation="vertical"
+        android:paddingVertical="@dimen/window_margin_vertical"
+        tools:context=".ui.fragment.weatherList.CityWeatherFragment">
+
+        <!---********* Start of Header **********-->
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/header_toolbar_height">
+
+            <ImageView
+                android:id="@+id/back_btn"
+                android:layout_width="@dimen/back_btn_toolbar_size"
+                android:layout_height="@dimen/back_btn_toolbar_size"
+                android:layout_marginStart="@dimen/content_margin_horizontal"
+                android:background="@drawable/back_button_bg_selector"
+                android:padding="@dimen/_12sdp"
+                android:src="@drawable/ic_back_btn"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/cities_tabLayout"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_30sdp"
+                android:layout_marginHorizontal="@dimen/content_margin_vertical"
+                android:background="@drawable/city_list_tab_layout_bg"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/back_btn"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_scrollFlags="scroll|enterAlways|enterAlwaysCollapsed"
+                app:tabBackground="@drawable/city_list_tab_selector"
+                app:tabIndicatorHeight="0dp"
+                app:tabMode="scrollable"
+                app:tabSelectedTextColor="@color/card_text_primary_color"
+                app:tabTextAppearance="@style/action_bar_tabLayout.item"
+                app:tabTextColor="@color/white">
+
+                <com.google.android.material.tabs.TabItem
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginVertical="5dp"
+                    android:foregroundGravity="center_vertical"
+                    android:text="Cairo" />
+
+                <com.google.android.material.tabs.TabItem
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginVertical="5dp"
+                    android:foregroundGravity="center_vertical"
+                    android:text="Cairo" />
+
+                <com.google.android.material.tabs.TabItem
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginVertical="5dp"
+                    android:foregroundGravity="center_vertical"
+                    android:text="Cairo" />
+
+                <com.google.android.material.tabs.TabItem
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginVertical="5dp"
+                    android:foregroundGravity="center_vertical"
+                    android:text="Cairo" />
+
+                <com.google.android.material.tabs.TabItem
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginVertical="5dp"
+                    android:foregroundGravity="center_vertical"
+                    android:text="Cairo" />
+
+                <com.google.android.material.tabs.TabItem
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginVertical="5dp"
+                    android:foregroundGravity="center_vertical"
+                    android:text="Cairo" />
+
+
+            </com.google.android.material.tabs.TabLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!---********* End of Header **********-->
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/cities_view_pager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:layout="@layout/city_weather_fragment" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+</layout>

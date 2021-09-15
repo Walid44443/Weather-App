@@ -13,5 +13,7 @@
     <string name="current_city">Current City</string>
     <string name="add_city_btn">Add City</string>
     <string name="enter_city_restriction_error">Please enter minimum 3 cities and max 7 cities.</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

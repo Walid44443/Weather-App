@@ -14,7 +14,7 @@
     <dimen name="content_margin_more_vertical">@dimen/_12sdp</dimen>
     <dimen name="content_margin_max_vertical">@dimen/_28sdp</dimen>
 
-    <dimen name="header_toolbar_height">@dimen/_50sdp</dimen>
+    <dimen name="header_toolbar_height">@dimen/_40sdp</dimen>
     <dimen name="back_btn_toolbar_size">@dimen/_35sdp</dimen>
 
 

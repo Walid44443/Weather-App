@@ -2,28 +2,32 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+
     <data>
+
         <variable
             name="cityWeather"
             type="com.paymob.weather.data.model.response.CityWeather" />
 
         <import type="com.paymob.weather.util.DateUtil" />
+
         <import type="com.paymob.weather.util.TempConverterUtil" />
 
     </data>
+
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:layout_marginHorizontal="@dimen/content_margin_more_vertical"
+        android:orientation="vertical"
         tools:background="@color/main_screen_bg_color">
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/next_forecasting_header"
             android:layout_width="match_parent"
-            android:visibility="gone"
-            android:layout_height="@dimen/_30sdp">
+            android:layout_height="@dimen/_30sdp"
+            android:visibility="gone">
 
             <TextView
                 android:id="@+id/next_forecasting_text"
@@ -56,6 +60,7 @@
             android:layout_height="@dimen/item_next_forecasting_layout_height"
             android:layout_marginHorizontal="@dimen/content_margin_horizontal"
             android:layout_marginVertical="@dimen/content_margin_vertical"
+            android:foreground="?android:attr/selectableItemBackground"
             app:cardBackgroundColor="@color/main_screen_card_color_not_selected"
             app:cardCornerRadius="@dimen/_5sdp"
             app:cardElevation="2dp">
@@ -79,8 +84,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:lines="1"
-                        android:text="@{DateUtil.INSTANCE.dayOfWeek(cityWeather.dtTxt)}"
                         android:maxLines="1"
+                        android:text="@{DateUtil.INSTANCE.dayOfWeek(cityWeather.dtTxt)}"
                         android:textColor="@color/white"
                         android:textSize="@dimen/_12ssp"
                         android:textStyle="bold"
@@ -90,12 +95,12 @@
                         android:id="@+id/next_date_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:alpha="0.8"
-                        android:lines="2"
                         android:layout_gravity="center"
+                        android:alpha="0.8"
                         android:gravity="center"
-                        android:text="@{DateUtil.INSTANCE.forecastingDateCard(cityWeather.dtTxt)}"
+                        android:lines="2"
                         android:maxLines="2"
+                        android:text="@{DateUtil.INSTANCE.forecastingDateCard(cityWeather.dtTxt)}"
                         android:textColor="@color/white"
                         android:textSize="@dimen/_8ssp"
                         tools:text="May,28" />
@@ -114,9 +119,9 @@
                         android:layout_height="wrap_content"
                         android:lines="1"
                         android:maxLines="1"
+                        android:text="@{TempConverterUtil.INSTANCE.toRoundedCelsius(cityWeather.main.temp)}"
                         android:textColor="@color/white"
                         android:textSize="@dimen/_35ssp"
-                        android:text="@{TempConverterUtil.INSTANCE.toRoundedCelsius(cityWeather.main.temp)}"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -129,12 +134,12 @@
                         android:fontFamily="monospace"
                         android:lines="1"
                         android:maxLines="1"
+                        android:text="°C"
                         android:textColor="@color/white"
                         android:textSize="@dimen/_11ssp"
                         android:textStyle="bold"
                         app:layout_constraintStart_toEndOf="@+id/degree_text"
-                        app:layout_constraintTop_toTopOf="@+id/degree_text"
-                        android:text="°C" />
+                        app:layout_constraintTop_toTopOf="@+id/degree_text" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.appcompat.widget.AppCompatImageView

@@ -17,6 +17,7 @@
         android:layout_marginHorizontal="@dimen/_5sdp"
         android:layout_marginVertical="@dimen/_8sdp"
         app:cardElevation="4dp"
+        android:foreground="?android:attr/selectableItemBackground"
         app:cardBackgroundColor="@color/main_screen_card_color_not_selected"
         app:cardCornerRadius="@dimen/_10sdp">
 

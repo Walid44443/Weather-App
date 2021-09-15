@@ -22,9 +22,9 @@ import java.util.Map;
 
 public class WeatherForecastingAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private HashMap<Date, List<CityWeather>> mDataSet;
-    private ItemClickListener<CityWeather> cityWeatherItemClickListener;
+    private ItemClickListener<List<CityWeather>> cityWeatherItemClickListener;
 
-    public WeatherForecastingAdapter(HashMap<Date, List<CityWeather>> mDataSet, final ItemClickListener<CityWeather> cityWeatherItemClickListener) {
+    public WeatherForecastingAdapter(HashMap<Date, List<CityWeather>> mDataSet, final ItemClickListener<List<CityWeather>> cityWeatherItemClickListener) {
         this.mDataSet = mDataSet;
         this.cityWeatherItemClickListener = cityWeatherItemClickListener;
     }
@@ -63,7 +63,7 @@ public class WeatherForecastingAdapter extends RecyclerView.Adapter<RecyclerView
             todayForecastingViewHolder.bind(cityWeather, this.mDataSet.get(mDataSet.keySet().toArray()[position]));
         } else {
             AnyDayForecastingViewHolder anyDayForecastingViewHolder = (AnyDayForecastingViewHolder) holder;
-            anyDayForecastingViewHolder.bind(cityWeather);
+            anyDayForecastingViewHolder.bind(cityWeather, this.mDataSet.get(mDataSet.keySet().toArray()[position]));
         }
     }
 
@@ -76,6 +76,7 @@ public class WeatherForecastingAdapter extends RecyclerView.Adapter<RecyclerView
     class TodayForecastingViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private ItemTodayForecastingLayoutBinding itemTodayForecastingLayoutBinding;
         private CityWeather cityWeather;
+        private List<CityWeather> cityWeatherList;
 
         public TodayForecastingViewHolder(ItemTodayForecastingLayoutBinding itemView) {
             super(itemView.getRoot());
@@ -84,12 +85,17 @@ public class WeatherForecastingAdapter extends RecyclerView.Adapter<RecyclerView
 
         protected void bind(CityWeather cityWeather, List<CityWeather> cityWeatherList) {
             this.cityWeather = cityWeather;
+            this.cityWeatherList = cityWeatherList;
+
+            itemTodayForecastingLayoutBinding.setCityWeather(cityWeather);
+
             // set layout manger as linear to display items as a vertical view
             LinearLayoutManager forecastingLinearLayoutManager = new LinearLayoutManager(
                     itemView.getContext(),
                     LinearLayoutManager.HORIZONTAL,
                     false
             );
+
 
             //attach layout manger to recyclerview
             itemTodayForecastingLayoutBinding.hourlyRecyclerview.setLayoutManager(forecastingLinearLayoutManager);
@@ -101,20 +107,22 @@ public class WeatherForecastingAdapter extends RecyclerView.Adapter<RecyclerView
 
         @Override
         public void onClick(View view) {
-            cityWeatherItemClickListener.onClick(cityWeather, view);
+            cityWeatherItemClickListener.onClick(cityWeatherList, view);
         }
     }
 
     class AnyDayForecastingViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private ItemNextForecastingLayoutBinding itemNextForecasting;
-
+        private List<CityWeather> cityWeatherList;
 
         public AnyDayForecastingViewHolder(ItemNextForecastingLayoutBinding itemNextForecasting) {
             super(itemNextForecasting.getRoot());
             this.itemNextForecasting = itemNextForecasting;
         }
 
-        protected void bind(CityWeather cityWeather) {
+        protected void bind(CityWeather cityWeather, List<CityWeather> cityWeatherList) {
+            this.cityWeatherList = cityWeatherList;
+
             itemNextForecasting.setCityWeather(cityWeather);
             if (getLayoutPosition() == 1)
                 itemNextForecasting.nextForecastingHeader.setVisibility(View.VISIBLE);
@@ -125,7 +133,7 @@ public class WeatherForecastingAdapter extends RecyclerView.Adapter<RecyclerView
 
         @Override
         public void onClick(View view) {
-            cityWeatherItemClickListener.onClick(itemNextForecasting.getCityWeather(), view);
+            cityWeatherItemClickListener.onClick(cityWeatherList, view);
         }
     }
 }

@@ -10,6 +10,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,8 +19,11 @@ import android.view.ViewGroup;
 import com.paymob.weather.R;
 import com.paymob.weather.data.model.response.CityWeather;
 import com.paymob.weather.databinding.DayForecastingDetailsDialogFragmentBinding;
+import com.paymob.weather.ui.fragment.weatherList.adapter.TodayForecastingAdapter;
 
 import org.jetbrains.annotations.NotNull;
+
+import java.util.Arrays;
 
 public class DayForecastingDetailsDialogFragment extends DialogFragment {
 
@@ -42,7 +46,9 @@ public class DayForecastingDetailsDialogFragment extends DialogFragment {
     public void onViewCreated(@NonNull @NotNull View view, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        CityWeather cityWeather = getArguments().getParcelable("city");
+        CityWeather[] cityWeathers = (CityWeather[]) getArguments().getParcelableArray("cityWeatherList");
+        CityWeather cityWeather = cityWeathers[0];
+
         String cityName = getArguments().getString("cityName");
         binding.setCityName(cityName);
         binding.setCityWeather(cityWeather);
@@ -53,5 +59,20 @@ public class DayForecastingDetailsDialogFragment extends DialogFragment {
         if (!cityWeather.getWeather().isEmpty())
             if (cityWeather.getWeather().get(0).getDescription().isEmpty())
                 binding.weatherDescribe.setText(cityWeather.getWeather().get(0).getDescription());
+
+
+        // set layout manger as linear to display items as a vertical view
+        LinearLayoutManager forecastingLinearLayoutManager = new LinearLayoutManager(
+                getContext(),
+                LinearLayoutManager.HORIZONTAL,
+                false
+        );
+
+
+        //attach layout manger to recyclerview
+        binding.hourlyRecyclerview.setLayoutManager(forecastingLinearLayoutManager);
+        TodayForecastingAdapter forecastingAdapter = new TodayForecastingAdapter(Arrays.asList(cityWeathers));
+        binding.hourlyRecyclerview.setAdapter(forecastingAdapter);
+
     }
 }
