@@ -6,39 +6,37 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.paymob.weather.data.model.response.CityWeather;
-import com.paymob.weather.databinding.ItemHourForecastingForTodayLayoutBinding;
+import com.paymob.weather.data.model.response.City;
+import com.paymob.weather.databinding.ItemSelectedCityLayoutBinding;
 
 import java.util.List;
 
 public class SelectedCitiesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    private List<CityWeather> mDataSet;
+    private List<City> mDataSet;
 
 
-    public SelectedCitiesAdapter(List<CityWeather> mDataSet) {
+    public void setDataSet(List<City> mDataSet) {
         this.mDataSet = mDataSet;
     }
 
-    public void setDataSet(List<CityWeather> mDataSet) {
-        this.mDataSet = mDataSet;
+    public List<City> getDataSet() {
+        return mDataSet;
     }
-
 
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-            ItemHourForecastingForTodayLayoutBinding itemHourForecastingForTodayLayoutBinding
-                    = ItemHourForecastingForTodayLayoutBinding.inflate(layoutInflater, parent, false);
-            return new ForecastingViewHolder(itemHourForecastingForTodayLayoutBinding);
+        ItemSelectedCityLayoutBinding itemSelectedCityLayoutBinding =
+                ItemSelectedCityLayoutBinding.inflate(layoutInflater, parent, false);
+        return new CityViewHolder(itemSelectedCityLayoutBinding);
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        //here we get the first cityWeather object from each day
-        CityWeather cityWeather = this.mDataSet.get(position);
-        ForecastingViewHolder todayForecastingViewHolder = (ForecastingViewHolder) holder;
-        todayForecastingViewHolder.bind(cityWeather);
+        City city = this.mDataSet.get(position);
+        CityViewHolder todayCityViewHolder = (CityViewHolder) holder;
+        todayCityViewHolder.bind(city);
     }
 
 
@@ -47,16 +45,16 @@ public class SelectedCitiesAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         return mDataSet.size();
     }
 
-    class ForecastingViewHolder extends RecyclerView.ViewHolder {
-        private ItemHourForecastingForTodayLayoutBinding itemNextForecasting;
+    class CityViewHolder extends RecyclerView.ViewHolder {
+        private ItemSelectedCityLayoutBinding itemSelectedCityLayoutBinding;
 
-        public ForecastingViewHolder(ItemHourForecastingForTodayLayoutBinding itemNextForecasting) {
+        public CityViewHolder(ItemSelectedCityLayoutBinding itemNextForecasting) {
             super(itemNextForecasting.getRoot());
-            this.itemNextForecasting = itemNextForecasting;
+            this.itemSelectedCityLayoutBinding = itemNextForecasting;
         }
 
-        protected void bind(CityWeather cityWeather) {
-            itemNextForecasting.setCityWeather(cityWeather);
+        protected void bind(City city) {
+            itemSelectedCityLayoutBinding.setCity(city);
         }
     }
 }

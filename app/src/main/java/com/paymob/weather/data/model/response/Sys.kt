@@ -1,19 +1,18 @@
-package com.paymob.weather.data.model.response;
+package com.paymob.weather.data.model.response
 
-import com.google.gson.annotations.SerializedName;
-
-import java.io.Serializable;
-
-public class Sys implements Serializable {
-
-	@SerializedName("pod")
-	private String pod;
-
-	public void setPod(String pod){
-		this.pod = pod;
-	}
-
-	public String getPod(){
-		return pod;
-	}
-}
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+import com.google.gson.annotations.SerializedName
+import com.paymob.weather.data.model.response.Coord
+import com.paymob.weather.data.model.response.City
+import com.paymob.weather.data.model.response.CityWeather
+import com.paymob.weather.data.model.response.WeatherItem
+import com.paymob.weather.data.model.response.Clouds
+import com.paymob.weather.data.model.response.Sys
+import com.paymob.weather.data.model.response.Wind
+import java.io.Serializable
+@Parcelize
+data class Sys (
+    @SerializedName("pod")
+    var pod: String? = null
+): Parcelable

@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Weather</string>
     <string name="write_cities_names"><![CDATA[Write cities or city name seprated by comma to view more details about forcasting & weather details]]></string>
-    <string name="btn_select">Select</string>
+    <string name="confirm_select">Confirm Select</string>
     <string name="enter_city_name_hint">Enter City Name</string>
     <string name="today_text">Today</string>
     <string name="next_forecasting_text">Next forecasting</string>
@@ -9,4 +9,9 @@
     <string name="max_temp">Max Temperature</string>
     <string name="wind_speed_temp">Wind Speed</string>
     <string name="wind_speed_unit">KM/Hour</string>
+
+    <string name="current_city">Current City</string>
+    <string name="add_city_btn">Add City</string>
+    <string name="enter_city_restriction_error">Please enter minimum 3 cities and max 7 cities.</string>
+
 </resources>

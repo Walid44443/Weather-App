@@ -1,107 +1,43 @@
-package com.paymob.weather.data.model.response;
+package com.paymob.weather.data.model.response
 
-import com.google.gson.annotations.SerializedName;
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+import com.google.gson.annotations.SerializedName
+import com.paymob.weather.data.model.response.Coord
+import com.paymob.weather.data.model.response.City
+import com.paymob.weather.data.model.response.CityWeather
+import com.paymob.weather.data.model.response.WeatherItem
+import com.paymob.weather.data.model.response.Clouds
+import com.paymob.weather.data.model.response.Sys
+import com.paymob.weather.data.model.response.Wind
+import java.io.Serializable
 
-import java.io.Serializable;
+@Parcelize
+data class Main(
+    @SerializedName("temp")
+    var temp: Float = 0.0f,
 
-public class Main implements Serializable {
+    @SerializedName("temp_min")
+    var tempMin: Float = 0.0f,
 
-	@SerializedName("temp")
-	private double temp;
+    @SerializedName("grnd_level")
+    var grndLevel: Float = 0.0f,
 
-	@SerializedName("temp_min")
-	private double tempMin;
+    @SerializedName("temp_kf")
+    var tempKf: Float = 0.0f,
 
-	@SerializedName("grnd_level")
-	private int grndLevel;
+    @SerializedName("humidity")
+    var humidity: Float = 0.0f,
 
-	@SerializedName("temp_kf")
-	private double tempKf;
+    @SerializedName("pressure")
+    var pressure: Float = 0.0f,
 
-	@SerializedName("humidity")
-	private int humidity;
+    @SerializedName("sea_level")
+    var seaLevel: Float = 0.0f,
 
-	@SerializedName("pressure")
-	private int pressure;
+    @SerializedName("feels_like")
+    var feelsLike: Float = 0.0f,
 
-	@SerializedName("sea_level")
-	private int seaLevel;
-
-	@SerializedName("feels_like")
-	private double feelsLike;
-
-	@SerializedName("temp_max")
-	private double tempMax;
-
-	public void setTemp(double temp){
-		this.temp = temp;
-	}
-
-	public double getTemp(){
-		return temp;
-	}
-
-	public void setTempMin(double tempMin){
-		this.tempMin = tempMin;
-	}
-
-	public double getTempMin(){
-		return tempMin;
-	}
-
-	public void setGrndLevel(int grndLevel){
-		this.grndLevel = grndLevel;
-	}
-
-	public int getGrndLevel(){
-		return grndLevel;
-	}
-
-	public void setTempKf(double tempKf){
-		this.tempKf = tempKf;
-	}
-
-	public double getTempKf(){
-		return tempKf;
-	}
-
-	public void setHumidity(int humidity){
-		this.humidity = humidity;
-	}
-
-	public int getHumidity(){
-		return humidity;
-	}
-
-	public void setPressure(int pressure){
-		this.pressure = pressure;
-	}
-
-	public int getPressure(){
-		return pressure;
-	}
-
-	public void setSeaLevel(int seaLevel){
-		this.seaLevel = seaLevel;
-	}
-
-	public int getSeaLevel(){
-		return seaLevel;
-	}
-
-	public void setFeelsLike(double feelsLike){
-		this.feelsLike = feelsLike;
-	}
-
-	public double getFeelsLike(){
-		return feelsLike;
-	}
-
-	public void setTempMax(double tempMax){
-		this.tempMax = tempMax;
-	}
-
-	public double getTempMax(){
-		return tempMax;
-	}
-}
+    @SerializedName("temp_max")
+    var tempMax: Float = 0.0f,
+) : Parcelable

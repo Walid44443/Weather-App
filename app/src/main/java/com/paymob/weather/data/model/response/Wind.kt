@@ -1,41 +1,24 @@
-package com.paymob.weather.data.model.response;
+package com.paymob.weather.data.model.response
 
-import com.google.gson.annotations.SerializedName;
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+import com.google.gson.annotations.SerializedName
+import com.paymob.weather.data.model.response.Coord
+import com.paymob.weather.data.model.response.City
+import com.paymob.weather.data.model.response.CityWeather
+import com.paymob.weather.data.model.response.WeatherItem
+import com.paymob.weather.data.model.response.Clouds
+import com.paymob.weather.data.model.response.Sys
+import com.paymob.weather.data.model.response.Wind
+import java.io.Serializable
+@Parcelize
+data class Wind(
+    @SerializedName("deg")
+    var deg: Float = 0f,
 
-import java.io.Serializable;
+    @SerializedName("speed")
+    var speed: Float = 0f,
 
-public class Wind implements Serializable {
-
-	@SerializedName("deg")
-	private int deg;
-
-	@SerializedName("speed")
-	private float speed;
-
-	@SerializedName("gust")
-	private double gust;
-
-	public void setDeg(int deg){
-		this.deg = deg;
-	}
-
-	public int getDeg(){
-		return deg;
-	}
-
-	public void setSpeed(int speed){
-		this.speed = speed;
-	}
-
-	public float getSpeed(){
-		return speed;
-	}
-
-	public void setGust(double gust){
-		this.gust = gust;
-	}
-
-	public double getGust(){
-		return gust;
-	}
-}
+    @SerializedName("gust")
+    var gust: Float = 0.0f,
+) : Parcelable

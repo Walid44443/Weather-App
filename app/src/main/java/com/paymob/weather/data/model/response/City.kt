@@ -1,98 +1,32 @@
-package com.paymob.weather.data.model.response;
+package com.paymob.weather.data.model.response
 
-import android.os.Parcelable;
+import android.os.Parcelable
+import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
-import com.google.gson.annotations.SerializedName;
+@Parcelize
+data class City(
+    @SerializedName("country")
+    var country: String? = null,
 
-import java.io.Serializable;
+    @SerializedName("coord")
+    var coord: Coord? = null,
 
-public class City implements Serializable {
+    @SerializedName("sunrise")
+    var sunrise: Float = 0f,
 
-	@SerializedName("country")
-	private String country;
+    @SerializedName("timezone")
+    var timezone: Float = 0f,
 
-	@SerializedName("coord")
-	private Coord coord;
+    @SerializedName("sunset")
+    var sunset: Float = 0f,
 
-	@SerializedName("sunrise")
-	private int sunrise;
+    @SerializedName("name")
+    var name: String? = null,
 
-	@SerializedName("timezone")
-	private int timezone;
+    @SerializedName("id")
+    var id: Float = 0f,
 
-	@SerializedName("sunset")
-	private int sunset;
-
-	@SerializedName("name")
-	private String name;
-
-	@SerializedName("id")
-	private int id;
-
-	@SerializedName("population")
-	private int population;
-
-	public void setCountry(String country){
-		this.country = country;
-	}
-
-	public String getCountry(){
-		return country;
-	}
-
-	public void setCoord(Coord coord){
-		this.coord = coord;
-	}
-
-	public Coord getCoord(){
-		return coord;
-	}
-
-	public void setSunrise(int sunrise){
-		this.sunrise = sunrise;
-	}
-
-	public int getSunrise(){
-		return sunrise;
-	}
-
-	public void setTimezone(int timezone){
-		this.timezone = timezone;
-	}
-
-	public int getTimezone(){
-		return timezone;
-	}
-
-	public void setSunset(int sunset){
-		this.sunset = sunset;
-	}
-
-	public int getSunset(){
-		return sunset;
-	}
-
-	public void setName(String name){
-		this.name = name;
-	}
-
-	public String getName(){
-		return name;
-	}
-
-	public void setId(int id){
-		this.id = id;
-	}
-
-	public int getId(){
-		return id;
-	}
-
-	public void setPopulation(int population){
-		this.population = population;
-	}
-
-	public int getPopulation(){
-		return population;
-	}
-}
+    @SerializedName("population")
+    var population: Float = 0f,
+) : Parcelable

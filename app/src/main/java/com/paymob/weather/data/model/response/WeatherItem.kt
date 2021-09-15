@@ -1,52 +1,28 @@
-package com.paymob.weather.data.model.response;
+package com.paymob.weather.data.model.response
 
-import com.google.gson.annotations.SerializedName;
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+import com.google.gson.annotations.SerializedName
+import com.paymob.weather.data.model.response.Coord
+import com.paymob.weather.data.model.response.City
+import com.paymob.weather.data.model.response.CityWeather
+import com.paymob.weather.data.model.response.WeatherItem
+import com.paymob.weather.data.model.response.Clouds
+import com.paymob.weather.data.model.response.Sys
+import com.paymob.weather.data.model.response.Wind
+import java.io.Serializable
 
-import java.io.Serializable;
+@Parcelize
+data class WeatherItem(
+    @SerializedName("icon")
+    var icon: String? = null,
 
-public class WeatherItem implements Serializable {
+    @SerializedName("description")
+    var description: String? = null,
 
-	@SerializedName("icon")
-	private String icon;
+    @SerializedName("main")
+    var main: String? = null,
 
-	@SerializedName("description")
-	private String description;
-
-	@SerializedName("main")
-	private String main;
-
-	@SerializedName("id")
-	private int id;
-
-	public void setIcon(String icon){
-		this.icon = icon;
-	}
-
-	public String getIcon(){
-		return icon;
-	}
-
-	public void setDescription(String description){
-		this.description = description;
-	}
-
-	public String getDescription(){
-		return description;
-	}
-
-	public void setMain(String main){
-		this.main = main;
-	}
-
-	public String getMain(){
-		return main;
-	}
-
-	public void setId(int id){
-		this.id = id;
-	}
-
-	public int getId(){
-		return id;
-	}
-}
+    @SerializedName("id")
+    var id: Int = 0,
+): Parcelable

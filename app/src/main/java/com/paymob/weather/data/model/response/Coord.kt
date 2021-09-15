@@ -1,30 +1,22 @@
-package com.paymob.weather.data.model.response;
+package com.paymob.weather.data.model.response
 
-import com.google.gson.annotations.SerializedName;
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+import com.google.gson.annotations.SerializedName
+import com.paymob.weather.data.model.response.Coord
+import com.paymob.weather.data.model.response.City
+import com.paymob.weather.data.model.response.CityWeather
+import com.paymob.weather.data.model.response.WeatherItem
+import com.paymob.weather.data.model.response.Clouds
+import com.paymob.weather.data.model.response.Sys
+import com.paymob.weather.data.model.response.Wind
+import java.io.Serializable
 
-import java.io.Serializable;
+@Parcelize
+class Coord(
+    @SerializedName("lon")
+    var lon: Double = 0.0,
 
-public class Coord implements Serializable {
-
-	@SerializedName("lon")
-	private double lon;
-
-	@SerializedName("lat")
-	private double lat;
-
-	public void setLon(double lon){
-		this.lon = lon;
-	}
-
-	public double getLon(){
-		return lon;
-	}
-
-	public void setLat(double lat){
-		this.lat = lat;
-	}
-
-	public double getLat(){
-		return lat;
-	}
-}
+    @SerializedName("lat")
+    var lat: Double = 0.0,
+) : Parcelable

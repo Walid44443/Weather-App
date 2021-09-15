@@ -9,7 +9,11 @@
         android:id="@+id/selectCityFragment"
         android:name="com.paymob.weather.ui.fragment.select_city.SelectCityFragment"
         android:label="select_city_fragment"
-        tools:layout="@layout/select_city_fragment" />
+        tools:layout="@layout/select_city_fragment">
+        <action
+            android:id="@+id/action_selectCityFragment_to_cityWeatherFragment"
+            app:destination="@id/cityWeatherFragment" />
+    </fragment>
 
 
     <fragment
@@ -18,9 +22,24 @@
         tools:layout="@layout/city_weather_fragment">
         <argument
             android:name="cities"
-            app:argType="string"
+            app:argType="com.paymob.weather.data.model.response.City[]"
             app:nullable="true" />
     </fragment>
+
+    <dialog
+        android:id="@+id/dayForecastingDetailsDialogFragment"
+        android:name="com.paymob.weather.ui.dialog.DayForecastingDetailsDialogFragment"
+        android:label="DayForecastingDetailsDialogFragment"
+        tools:layout="@layout/day_forecasting_details_dialog_fragment" >
+        <argument
+            android:name="city"
+            app:argType="com.paymob.weather.data.model.response.CityWeather"
+            app:nullable="true" />
+        <argument
+            android:name="cityName"
+            app:argType="string"
+            app:nullable="true" />
+    </dialog>
 
 
 </navigation>

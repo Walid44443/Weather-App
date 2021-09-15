@@ -13,13 +13,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.paymob.weather.R;
+import com.paymob.weather.data.model.response.CityWeather;
 import com.paymob.weather.data.network.repo.WeatherForecastingRepo;
 import com.paymob.weather.databinding.CityWeatherFragmentBinding;
 import com.paymob.weather.ui.fragment.weatherList.adapter.WeatherForecastingAdapter;
+import com.paymob.weather.util.ItemClickListener;
+import com.paymob.weather.util.NavControllerGetter;
 
 import java.util.HashMap;
 
-public class CityWeatherFragment extends Fragment {
+public class CityWeatherFragment extends Fragment implements ItemClickListener<CityWeather> {
 
     private CityWeatherViewModel mViewModel;
     private CityWeatherFragmentBinding binding;
@@ -52,7 +56,7 @@ public class CityWeatherFragment extends Fragment {
         //attach layout manger to recyclerview
         binding.forecastingRecyclerview.setLayoutManager(forecastingLinearLayoutManager);
 
-        WeatherForecastingAdapter forecastingAdapter = new WeatherForecastingAdapter(new HashMap<>());
+        WeatherForecastingAdapter forecastingAdapter = new WeatherForecastingAdapter(new HashMap<>(), this);
 
         binding.forecastingRecyclerview.setAdapter(forecastingAdapter);
 
@@ -77,4 +81,11 @@ public class CityWeatherFragment extends Fragment {
     }
 
 
+    @Override
+    public void onClick(@Nullable CityWeather item, @Nullable View view) {
+        Bundle bundle = new Bundle();
+        bundle.putParcelable("city", item);
+        bundle.putString("cityName", "Cairo");
+        ((NavControllerGetter) requireActivity()).getHomeNavController().navigate(R.id.dayForecastingDetailsDialogFragment, bundle);
+    }
 }

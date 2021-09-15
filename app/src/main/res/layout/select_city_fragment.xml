@@ -2,6 +2,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -76,7 +77,9 @@
                     android:layout_width="@dimen/_180sdp"
                     android:layout_height="@dimen/_45sdp"
                     android:layout_marginHorizontal="@dimen/_5sdp"
-                    android:hint="@string/enter_city_name_hint" />
+                    android:hint="@string/enter_city_name_hint"
+                    android:lines="1"
+                    android:maxLines="1" />
 
                 <ImageView
                     android:id="@+id/current_location"
@@ -88,16 +91,43 @@
                     android:src="@drawable/ic_location" />
             </androidx.appcompat.widget.LinearLayoutCompat>
 
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/cities_recyclerview"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:fitsSystemWindows="true"
+                android:minHeight="@dimen/_30sdp"
+                android:nestedScrollingEnabled="false"
+                android:visibility="visible"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toEndOf="@+id/appCompatEditText"
+                app:layout_constraintStart_toStartOf="@+id/appCompatEditText"
+                app:layout_constraintTop_toBottomOf="@+id/appCompatEditText"
+                tools:itemCount="10"
+                tools:listitem="@layout/item_selected_city_layout"
+                tools:orientation="horizontal"
+                tools:visibility="visible" />
+
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btn_login"
+                android:id="@+id/add_city_btn"
                 style="@style/DefaultButton"
-                android:layout_marginTop="@dimen/_40sdp"
                 android:background="@drawable/default_button_bg_selector"
                 android:fontFamily="@font/default_medium"
-                android:text="@string/btn_select"
+                android:text="@string/add_city_btn"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/appCompatEditText" />
+                app:layout_constraintTop_toBottomOf="@+id/cities_recyclerview" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/confirm_btn"
+                style="@style/DefaultButton"
+                android:layout_marginVertical="@dimen/content_margin_more_vertical"
+                android:background="@drawable/default_button_bg_selector"
+                android:fontFamily="@font/default_medium"
+                android:text="@string/confirm_select"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/add_city_btn" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

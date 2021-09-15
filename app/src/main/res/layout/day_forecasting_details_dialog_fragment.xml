@@ -4,11 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="cityWeather"
             type="com.paymob.weather.data.model.response.CityWeather" />
 
+        <variable
+            name="cityName"
+            type="String" />
+
         <import type="com.paymob.weather.util.DateUtil" />
+
         <import type="com.paymob.weather.util.TempConverterUtil" />
     </data>
 
@@ -46,6 +52,7 @@
                     android:layout_marginTop="@dimen/content_margin_more_vertical"
                     android:lines="1"
                     android:maxLines="1"
+                    android:text="@{cityName}"
                     android:textColor="@color/white"
                     android:textSize="@dimen/_30ssp"
                     android:textStyle="bold"
@@ -141,6 +148,7 @@
                                     android:layout_gravity="top"
                                     android:layout_marginTop="@dimen/content_margin_more_vertical"
                                     android:gravity="top"
+                                    android:text="@{TempConverterUtil.INSTANCE.toRoundedCelsius(cityWeather.main.tempMax)}"
                                     android:textColor="@color/white"
                                     android:textSize="@dimen/details_sub_items_details_font_size"
                                     tools:text="40" />
@@ -175,6 +183,7 @@
                             android:layout_gravity="center"
                             android:layout_marginTop="@dimen/content_margin_more_vertical"
                             android:gravity="center"
+                            android:text="@{TempConverterUtil.INSTANCE.toRoundedCelsius(cityWeather.main.tempMin)}"
                             android:textColor="@color/white"
                             android:textSize="@dimen/details_sub_items_details_font_size"
                             tools:text="35" />
@@ -215,6 +224,7 @@
                                 android:layout_gravity="top"
                                 android:layout_marginTop="@dimen/content_margin_more_vertical"
                                 android:gravity="top"
+                                android:text="@{TempConverterUtil.INSTANCE.toRoundedCelsius(cityWeather.wind.speed)}"
                                 android:textColor="@color/white"
                                 android:textSize="@dimen/details_sub_items_details_font_size"
                                 tools:text="35" />
