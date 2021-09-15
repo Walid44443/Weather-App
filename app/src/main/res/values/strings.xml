@@ -6,4 +6,7 @@
     <string name="today_text">Today</string>
     <string name="next_forecasting_text">Next forecasting</string>
     <string name="min_temp">Min Temperature</string>
+    <string name="max_temp">Max Temperature</string>
+    <string name="wind_speed_temp">Wind Speed</string>
+    <string name="wind_speed_unit">KM/Hour</string>
 </resources>

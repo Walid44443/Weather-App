@@ -2,7 +2,9 @@ package com.paymob.weather.data.model.response;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Coord{
+import java.io.Serializable;
+
+public class Coord implements Serializable {
 
 	@SerializedName("lon")
 	private double lon;

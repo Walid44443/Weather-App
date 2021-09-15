@@ -14,6 +14,8 @@ import android.view.ViewGroup;
 
 import com.paymob.weather.R;
 
+import org.jetbrains.annotations.NotNull;
+
 public class DayForecastingDetailsDialogFragment extends Fragment {
 
     private DayForecastingDetailsViewModel mViewModel;
@@ -25,14 +27,16 @@ public class DayForecastingDetailsDialogFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
+
+        //binding = CityWeatherFragmentBinding.inflate(inflater, container, false);
+        //return binding.getRoot();
+
         return inflater.inflate(R.layout.day_forecasting_details_dialog_fragment, container, false);
     }
 
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        mViewModel = new ViewModelProvider(this).get(DayForecastingDetailsViewModel.class);
-        // TODO: Use the ViewModel
-    }
+    public void onViewCreated(@NonNull @NotNull View view, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 
+    }
 }

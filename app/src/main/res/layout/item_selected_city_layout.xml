@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <com.google.android.material.chip.Chip
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/_40sdp"
+        android:layout_marginHorizontal="@dimen/window_margin_horizontal_less"
+        android:textSize="@dimen/_13sdp"
+        app:chipEndPadding="@dimen/content_margin_more_horizontal"
+        app:chipStartPadding="@dimen/content_margin_more_horizontal"
+        tools:text="Cairo" />
+</layout>

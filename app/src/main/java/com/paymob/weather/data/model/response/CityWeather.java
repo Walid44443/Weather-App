@@ -1,9 +1,10 @@
 package com.paymob.weather.data.model.response;
 
+import java.io.Serializable;
 import java.util.List;
 import com.google.gson.annotations.SerializedName;
 
-public class CityWeather {
+public class CityWeather implements Serializable {
 
 	@SerializedName("dt")
 	private int dt;

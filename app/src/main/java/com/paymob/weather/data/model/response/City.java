@@ -1,8 +1,12 @@
 package com.paymob.weather.data.model.response;
 
+import android.os.Parcelable;
+
 import com.google.gson.annotations.SerializedName;
 
-public class City{
+import java.io.Serializable;
+
+public class City implements Serializable {
 
 	@SerializedName("country")
 	private String country;

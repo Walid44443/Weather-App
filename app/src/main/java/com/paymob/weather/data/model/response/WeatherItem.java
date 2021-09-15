@@ -2,7 +2,9 @@ package com.paymob.weather.data.model.response;
 
 import com.google.gson.annotations.SerializedName;
 
-public class WeatherItem{
+import java.io.Serializable;
+
+public class WeatherItem implements Serializable {
 
 	@SerializedName("icon")
 	private String icon;

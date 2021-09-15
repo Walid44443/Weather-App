@@ -2,6 +2,7 @@
 <resources>
 
 
+    <dimen name="window_margin_horizontal_less">@dimen/_7sdp</dimen>
     <dimen name="window_margin_horizontal">@dimen/_10sdp</dimen>
     <dimen name="content_margin_horizontal">@dimen/_6sdp</dimen>
     <dimen name="content_margin_more_horizontal">@dimen/_10sdp</dimen>
@@ -22,5 +23,9 @@
 
     <dimen name="item_next_forecasting_layout_height">@dimen/_75sdp</dimen>
 
+    <dimen name="details_weather_describe_font_size">@dimen/_20sdp</dimen>
+
+    <dimen name="details_sub_items_title_font_size">@dimen/_9ssp</dimen>
+    <dimen name="details_sub_items_details_font_size">@dimen/_13ssp</dimen>
 
 </resources>

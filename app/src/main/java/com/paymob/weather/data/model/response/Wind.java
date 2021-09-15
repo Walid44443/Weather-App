@@ -2,7 +2,9 @@ package com.paymob.weather.data.model.response;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Wind{
+import java.io.Serializable;
+
+public class Wind implements Serializable {
 
 	@SerializedName("deg")
 	private int deg;

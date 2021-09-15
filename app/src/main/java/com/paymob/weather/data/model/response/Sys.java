@@ -2,7 +2,9 @@ package com.paymob.weather.data.model.response;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Sys{
+import java.io.Serializable;
+
+public class Sys implements Serializable {
 
 	@SerializedName("pod")
 	private String pod;
