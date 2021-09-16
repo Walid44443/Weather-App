@@ -12,7 +12,8 @@ Weatherapp is a simple weather forecast app, which uses some APIs to fetch 5 day
 <img height= "200" src="https://user-images.githubusercontent.com/4549020/133664061-f6299ef5-492e-4b9f-9f77-34fe67ea2223.png" alt="Gif3" />
 <img height= "200" src="https://user-images.githubusercontent.com/4549020/133664064-5fb66234-b349-45bc-87bb-3aa264d3d4f2.png" alt="Gif4" />
 <img height= "200" src="https://user-images.githubusercontent.com/4549020/133664065-68f8a3f8-df7d-42ef-a1a5-79b7bb13ebe7.png" alt="Gif5" />
-<img height= "200" src="https://s9.gifyu.com/images/65467cacdbf71e550.md.gif" alt="Gif6" />
+<br>
+<img height= "600" src="https://s9.gifyu.com/images/65467cacdbf71e550.gif" alt="Gif6" />
 </p>
 
 ## Libraries and tools 🛠
