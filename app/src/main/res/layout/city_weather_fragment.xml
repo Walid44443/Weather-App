@@ -3,7 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_refresh_weather"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:foregroundGravity="center">
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -24,5 +28,15 @@
                 tools:orientation="vertical"
                 tools:visibility="visible" />
 
+            <include
+                android:id="@+id/no_weather_items"
+                android:visibility="gone"
+                layout="@layout/no_weather_items_layout"/>
+
+            <include
+                android:id="@+id/no_network_connection_layout"
+                android:visibility="gone"
+                layout="@layout/no_network_connection_layout"/>
         </androidx.appcompat.widget.LinearLayoutCompat>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 </layout>

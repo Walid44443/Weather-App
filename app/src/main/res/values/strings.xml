@@ -15,5 +15,7 @@
     <string name="enter_city_restriction_error">Please enter minimum 3 cities and max 7 cities.</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="city_not_found_error">City name is not found in our database, please check spelling or try to find near one instead.</string>
+    <string name="no_network_error">Make sure WIFI or cellular data is turned on and then try again.</string>
 
 </resources>

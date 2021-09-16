@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/selectCityFragment"
-        android:name="com.paymob.weather.ui.fragment.select_city.SelectCityFragment"
+        android:name="com.walid.weather.ui.fragment.select_city.SelectCityFragment"
         android:label="select_city_fragment"
         tools:layout="@layout/select_city_fragment">
 
@@ -19,32 +19,32 @@
 
     <fragment
         android:id="@+id/cityWeatherFragment"
-        android:name="com.paymob.weather.ui.fragment.weatherList.CityWeatherFragment"
+        android:name="com.walid.weather.ui.fragment.weatherList.CityWeatherFragment"
         tools:layout="@layout/city_weather_fragment">
         <argument
             android:name="city"
-            app:argType="com.paymob.weather.data.model.response.City"
+            app:argType="com.walid.weather.data.model.response.City"
             app:nullable="true" />
     </fragment>
 
     <fragment
         android:id="@+id/weatherContainerFragment"
-        android:name="com.paymob.weather.ui.fragment.weatherList.WeatherContainerFragment"
+        android:name="com.walid.weather.ui.fragment.weatherList.WeatherContainerFragment"
         tools:layout="@layout/weather_container_fragment">
         <argument
             android:name="cities"
-            app:argType="com.paymob.weather.data.model.response.City[]"
+            app:argType="com.walid.weather.data.model.response.City[]"
             app:nullable="true" />
     </fragment>
 
     <dialog
         android:id="@+id/dayForecastingDetailsDialogFragment"
-        android:name="com.paymob.weather.ui.dialog.DayForecastingDetailsDialogFragment"
+        android:name="com.walid.weather.ui.dialog.DayForecastingDetailsDialogFragment"
         android:label="DayForecastingDetailsDialogFragment"
         tools:layout="@layout/day_forecasting_details_dialog_fragment" >
         <argument
             android:name="cityWeatherList"
-            app:argType="com.paymob.weather.data.model.response.CityWeather[]"
+            app:argType="com.walid.weather.data.model.response.CityWeather[]"
             app:nullable="true" />
         <argument
             android:name="cityName"

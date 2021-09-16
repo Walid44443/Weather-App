@@ -8,9 +8,9 @@
 
         <variable
             name="cityWeather"
-            type="com.paymob.weather.data.model.response.CityWeather" />
+            type="com.walid.weather.data.model.response.CityWeather" />
 
-        <import type="com.paymob.weather.util.DateUtil" />
+        <import type="com.walid.weather.util.DateUtil" />
     </data>
 
     <androidx.appcompat.widget.LinearLayoutCompat

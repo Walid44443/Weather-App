@@ -7,11 +7,11 @@
 
         <variable
             name="cityWeather"
-            type="com.paymob.weather.data.model.response.CityWeather" />
+            type="com.walid.weather.data.model.response.CityWeather" />
 
-        <import type="com.paymob.weather.util.DateUtil" />
+        <import type="com.walid.weather.util.DateUtil" />
 
-        <import type="com.paymob.weather.util.TempConverterUtil" />
+        <import type="com.walid.weather.util.TempConverterUtil" />
 
     </data>
 
