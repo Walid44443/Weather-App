@@ -7,11 +7,12 @@ Weatherapp is a simple weather forecast app, which uses some APIs to fetch 5 day
 <h2 id="Outputs">Outputs</h2>
 
 <p>
-<img height= "200" src="/screenshots/1.png" alt="Gif1" />
-<img height= "200" src="/screenshots/2.png" alt="Gif2" />
-<img height= "200" src="/screenshots/3.png" alt="Gif3" />
-<img height= "200" src="/screenshots/4.png" alt="Gif4" />
-<img height= "200" src="/screenshots/5.gif" alt="Gif5" />
+<img height= "200" src="https://user-images.githubusercontent.com/4549020/133664050-52614bcb-5b2e-4266-b28b-b9916345dfb9.png" alt="Gif1" />
+<img height= "200" src="https://user-images.githubusercontent.com/4549020/133664057-d6e43193-6a42-41cb-9f2d-d514ac768cb1.png" alt="Gif2" />
+<img height= "200" src="https://user-images.githubusercontent.com/4549020/133664061-f6299ef5-492e-4b9f-9f77-34fe67ea2223.png" alt="Gif3" />
+<img height= "200" src="https://user-images.githubusercontent.com/4549020/133664064-5fb66234-b349-45bc-87bb-3aa264d3d4f2.png" alt="Gif4" />
+<img height= "200" src="https://user-images.githubusercontent.com/4549020/133664065-68f8a3f8-df7d-42ef-a1a5-79b7bb13ebe7.png" alt="Gif5" />
+<img height= "200" src="https://s9.gifyu.com/images/65467cacdbf71e550.md.gif" alt="Gif6" />
 </p>
 
 ## Libraries and tools 🛠
