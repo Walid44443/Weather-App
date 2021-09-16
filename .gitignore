@@ -50,3 +50,5 @@ replay_pid*
 obj/
 .externalNativeBuild
 /build/
+/.gradle/
+/build/
