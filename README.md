@@ -1,8 +1,6 @@
 <img src="https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat" alt="contributions welcome" /><
 # Weather app
-![appicon](https://user-images.githubusercontent.com/22769589/68296145-f7305d80-00a4-11ea-9cbe-24b18222bfa9.png)
-
-Weatherapp is a simple weather forecast app, which uses some APIs to fetch 5 day / 3 hour forecast data from the [OpenWeatherMap](https://openweathermap.org/forecast5) and to fetch places,cities,counties,coords etc.
+Weather app is a simple weather forecast app, which uses some APIs to fetch 5 day / 3 hour forecast data from the [OpenWeatherMap](https://openweathermap.org/forecast5) and to fetch places,cities,counties,coords etc.
 
 <h2 id="Outputs">Outputs</h2>
 
@@ -29,6 +27,21 @@ Weatherapp is a simple weather forecast app, which uses some APIs to fetch 5 day
 <li><a href="https://github.com/square/picasso">Picasso</a></li>
 <li><a href="https://material.io/develop/android/docs/getting-started/">Material Design</a></li>
 
+## Install Instructions
+<ul>
+    <li>Requirements<ul>
+        <li>Android Studio 4.2+</li>
+        <li>Java JDK</li>
+        <li>Android mobile or Android virtual mobile</li>
+        </ul>
+    </li>
+    <li>Code Edit
+        <ul>
+            <li>open in com.walid.weather.util.CONST</li>
+            <li>edit variable `API_ID` with your API KEY</li>
+        </ul>
+    <li>Then,Happy Code ^_^
+</ul>
 ## Testing 🧪
 <li><a href="https://github.com/mockk/mockk">Mockk</a></li>
 <li><a href="https://github.com/google/truth">Truth</a></li>
@@ -40,9 +53,4 @@ The app uses MVVM [Model-View-ViewModel] architecture to have a unidirectional f
 
 
 ## Design
-Inspired by [Ramonyv](https://www.behance.net/gallery/123313649/Weather-Mobile-App-Design?tracking_source=search_projects_recommended%7Cweather%20ux)
-
-<h2 id="license">License</h2>
-<pre><code>
-
-Copyright (c) 2021 Walid4444
+Inspired by [Rentech Digital](https://www.behance.net/gallery/123313649/Weather-Mobile-App-Design?tracking_source=search_projects_recommended%7Cweather%20ux)
