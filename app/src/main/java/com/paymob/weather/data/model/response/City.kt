@@ -29,4 +29,8 @@ data class City(
 
     @SerializedName("population")
     var population: Float = 0f,
-) : Parcelable
+) : Parcelable {
+
+
+
+}
