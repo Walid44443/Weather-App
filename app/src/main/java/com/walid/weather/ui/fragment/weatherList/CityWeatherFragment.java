@@ -1,20 +1,17 @@
 package com.walid.weather.ui.fragment.weatherList;
 
-import androidx.lifecycle.ViewModelProvider;
-
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+
 import com.walid.weather.R;
-import com.walid.weather.data.model.response.City;
 import com.walid.weather.data.model.response.CityWeather;
 import com.walid.weather.data.network.repo.WeatherForecastingRepo;
 import com.walid.weather.databinding.CityWeatherFragmentBinding;
@@ -31,7 +28,8 @@ public class CityWeatherFragment extends Fragment implements ItemClickListener<L
 
     private CityWeatherViewModel mViewModel;
     private CityWeatherFragmentBinding binding;
-    private City city = null;
+
+    private WeatherForecastingRepo forecastingRepo;
 
     public static CityWeatherFragment newInstance() {
         return new CityWeatherFragment();
@@ -50,8 +48,8 @@ public class CityWeatherFragment extends Fragment implements ItemClickListener<L
         super.onViewCreated(view, savedInstanceState);
         mViewModel = new ViewModelProvider(this).get(CityWeatherViewModel.class);
 
-        city = getArguments().getParcelable("city");
-
+        if (getArguments().getParcelable("city") != null)
+            mViewModel.cityLiveData.postValue(getArguments().getParcelable("city"));
         // set layout manger as linear to display items as a vertical view
         LinearLayoutManager forecastingLinearLayoutManager = new LinearLayoutManager(
                 getContext(),
@@ -62,43 +60,45 @@ public class CityWeatherFragment extends Fragment implements ItemClickListener<L
         //attach layout manger to recyclerview
         binding.forecastingRecyclerview.setLayoutManager(forecastingLinearLayoutManager);
 
+        //create adapter with empty data and pass this as OnClick listener to observe any click on item
         WeatherForecastingAdapter forecastingAdapter = new WeatherForecastingAdapter(new HashMap<>(), this);
 
         binding.forecastingRecyclerview.setAdapter(forecastingAdapter);
 
 
-        WeatherForecastingRepo forecastingRepo = new WeatherForecastingRepo(city);
-        forecastingRepo.fetchFromNetwork();
-        forecastingRepo.getResultLive().observe(getViewLifecycleOwner(), resource -> {
-            switch (resource.component1()) {
-                case ERROR:
+        mViewModel.cityLiveData.observe(getViewLifecycleOwner(), city -> {
+            forecastingRepo = new WeatherForecastingRepo(city);
+            forecastingRepo.fetchFromNetwork();
 
-                    if (resource.getMessage().contains("NETWORK_ERROR"))
-                        mViewModel.viewStateMutableLiveData.postValue(ViewState.NetworkERROR);
-                    else
-                        mViewModel.viewStateMutableLiveData.postValue(ViewState.NoItems);
-                    break;
-                case LOADING:
-                    mViewModel.viewStateMutableLiveData.postValue(ViewState.Loading);
-                    break;
-                case SUCCESS:
-                    requireActivity().runOnUiThread(() -> {
-                        mViewModel.viewStateMutableLiveData.postValue(
-                                //Change view state to no items or ready to display based on count of items
-                                (resource.getData().isEmpty()) ? ViewState.NoItems : ViewState.ReadyToDisplay);
+            forecastingRepo.getResultLive().observe(getViewLifecycleOwner(), resource -> {
+                switch (resource.component1()) {
+                    case ERROR:
 
-                        forecastingAdapter.setDataSet(resource.getData());
-                        forecastingAdapter.notifyDataSetChanged();
-                    });
-                    break;
-            }
+                        if (resource.getMessage().contains("NETWORK_ERROR"))
+                            mViewModel.viewStateMutableLiveData.postValue(ViewState.NetworkERROR);
+                        else
+                            mViewModel.viewStateMutableLiveData.postValue(ViewState.NoItems);
+                        break;
+                    case LOADING:
+                        mViewModel.viewStateMutableLiveData.postValue(ViewState.Loading);
+                        break;
+                    case SUCCESS:
+                        requireActivity().runOnUiThread(() -> {
+                            mViewModel.viewStateMutableLiveData.postValue(
+                                    //Change view state to no items or ready to display based on count of items
+                                    (resource.getData().isEmpty()) ? ViewState.NoItems : ViewState.ReadyToDisplay);
+
+                            forecastingAdapter.setDataSet(resource.getData());
+                            forecastingAdapter.notifyDataSetChanged();
+                        });
+                        break;
+                }
+            });
+
         });
 
         mViewModel.viewStateMutableLiveData.observe(getViewLifecycleOwner(), state -> {
-            if (state == ViewState.Loading)
-                binding.swipeRefreshWeather.setRefreshing(true);
-            else
-                binding.swipeRefreshWeather.setRefreshing(false);
+            binding.swipeRefreshWeather.setRefreshing(state == ViewState.Loading);
 
             switch (state) {
                 case NetworkERROR:
@@ -135,10 +135,12 @@ public class CityWeatherFragment extends Fragment implements ItemClickListener<L
         item.toArray(cityWeathers); // fill the array
 
         bundle.putParcelableArray("cityWeatherList", cityWeathers);
-        bundle.putString("cityName", city.getName());
-        ((NavControllerGetter) requireActivity()).getHomeNavController().navigate(
-                R.id.dayForecastingDetailsDialogFragment,
-                bundle,
-                UiHelper.Companion.getNavOptions());
+        if (mViewModel.cityLiveData.getValue() != null) {
+            bundle.putString("cityName", mViewModel.cityLiveData.getValue().getName());
+            ((NavControllerGetter) requireActivity()).getHomeNavController().navigate(
+                    R.id.dayForecastingDetailsDialogFragment,
+                    bundle,
+                    UiHelper.Companion.getNavOptions());
+        }
     }
 }

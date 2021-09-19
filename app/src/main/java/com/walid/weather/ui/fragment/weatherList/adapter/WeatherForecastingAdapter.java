@@ -8,18 +8,21 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.walid.weather.data.model.response.CityWeather;
 import com.walid.weather.databinding.ItemNextForecastingLayoutBinding;
 import com.walid.weather.databinding.ItemTodayForecastingLayoutBinding;
 import com.walid.weather.util.ItemClickListener;
+import com.walid.weather.util.UiHelper;
 
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 
 public class WeatherForecastingAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private HashMap<Date, List<CityWeather>> mDataSet;
-    private ItemClickListener<List<CityWeather>> cityWeatherItemClickListener;
+    private final ItemClickListener<List<CityWeather>> cityWeatherItemClickListener;
 
     public WeatherForecastingAdapter(HashMap<Date, List<CityWeather>> mDataSet, final ItemClickListener<List<CityWeather>> cityWeatherItemClickListener) {
         this.mDataSet = mDataSet;
@@ -71,8 +74,7 @@ public class WeatherForecastingAdapter extends RecyclerView.Adapter<RecyclerView
     }
 
     class TodayForecastingViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        private ItemTodayForecastingLayoutBinding itemTodayForecastingLayoutBinding;
-        private CityWeather cityWeather;
+        private final ItemTodayForecastingLayoutBinding itemTodayForecastingLayoutBinding;
         private List<CityWeather> cityWeatherList;
 
         public TodayForecastingViewHolder(ItemTodayForecastingLayoutBinding itemView) {
@@ -81,7 +83,6 @@ public class WeatherForecastingAdapter extends RecyclerView.Adapter<RecyclerView
         }
 
         protected void bind(CityWeather cityWeather, List<CityWeather> cityWeatherList) {
-            this.cityWeather = cityWeather;
             this.cityWeatherList = cityWeatherList;
 
             itemTodayForecastingLayoutBinding.setCityWeather(cityWeather);
@@ -109,7 +110,7 @@ public class WeatherForecastingAdapter extends RecyclerView.Adapter<RecyclerView
     }
 
     class AnyDayForecastingViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        private ItemNextForecastingLayoutBinding itemNextForecasting;
+        private final ItemNextForecastingLayoutBinding itemNextForecasting;
         private List<CityWeather> cityWeatherList;
 
         public AnyDayForecastingViewHolder(ItemNextForecastingLayoutBinding itemNextForecasting) {
@@ -126,6 +127,19 @@ public class WeatherForecastingAdapter extends RecyclerView.Adapter<RecyclerView
             else
                 itemNextForecasting.nextForecastingHeader.setVisibility(View.GONE);
             itemNextForecasting.getRoot().setOnClickListener(this);
+
+            /*Picasso.get().load(UiHelper.Companion
+                    .getWeatherIcon(
+                            Objects.requireNonNull(
+                                    Objects.requireNonNull(cityWeather.getWeather()).get(0).getIcon())))
+            .into(itemNextForecasting.descImg);
+            */
+            Glide.with(itemNextForecasting.getRoot().getContext()).load(
+                    UiHelper.Companion
+                            .getWeatherIcon(
+                                    Objects.requireNonNull(
+                                            Objects.requireNonNull(cityWeather.getWeather()).get(0).getIcon()))
+            ).into(itemNextForecasting.descImg);
         }
 
         @Override

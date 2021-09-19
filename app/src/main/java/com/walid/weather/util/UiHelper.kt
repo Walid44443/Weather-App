@@ -53,5 +53,33 @@ class UiHelper {
                 .build()
         }
 
+        fun getWeatherIcon(icon: String): Int {
+            when (icon) {
+                "01n" -> return R.drawable.ic_sunny
+                "02n" -> return R.drawable.ic_cloudy_with_sun
+                "03n" -> return R.drawable.ic_cloudy_only
+                "04n" -> return R.drawable.ic_more_cloudy_with_sun
+                "09n" -> return R.drawable.ic_rain_without_sun
+                "10n" -> return R.drawable.ic_cloudy_with_sun_with_rain
+                "11n" -> return R.drawable.ic_storming
+                "13n" -> return R.drawable.ic_snowing
+            }
+            return R.drawable.ic_sunny
+        }
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

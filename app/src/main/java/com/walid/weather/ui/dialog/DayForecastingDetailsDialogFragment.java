@@ -1,30 +1,30 @@
 package com.walid.weather.ui.dialog;
 
-import androidx.fragment.app.DialogFragment;
-
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.recyclerview.widget.LinearLayoutManager;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.DialogFragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+
+import com.bumptech.glide.Glide;
 import com.walid.weather.data.model.response.CityWeather;
 import com.walid.weather.databinding.DayForecastingDetailsDialogFragmentBinding;
 import com.walid.weather.ui.fragment.weatherList.adapter.TodayForecastingAdapter;
+import com.walid.weather.util.UiHelper;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
+import java.util.Objects;
 
 public class DayForecastingDetailsDialogFragment extends DialogFragment {
 
-    private DayForecastingDetailsViewModel mViewModel;
     private DayForecastingDetailsDialogFragmentBinding binding;
 
     public static DayForecastingDetailsDialogFragment newInstance() {
@@ -52,10 +52,18 @@ public class DayForecastingDetailsDialogFragment extends DialogFragment {
         getDialog().getWindow().setLayout(
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT);
+
         getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         if (!cityWeather.getWeather().isEmpty())
             if (cityWeather.getWeather().get(0).getDescription().isEmpty())
                 binding.weatherDescribe.setText(cityWeather.getWeather().get(0).getDescription());
+
+        Glide.with(getContext()).load(
+                UiHelper.Companion
+                        .getWeatherIcon(
+                                Objects.requireNonNull(
+                                        Objects.requireNonNull(cityWeather.getWeather()).get(0).getIcon()))
+        ).into(binding.descImg);
 
 
         // set layout manger as linear to display items as a vertical view
@@ -70,6 +78,7 @@ public class DayForecastingDetailsDialogFragment extends DialogFragment {
         binding.hourlyRecyclerview.setLayoutManager(forecastingLinearLayoutManager);
         TodayForecastingAdapter forecastingAdapter = new TodayForecastingAdapter(Arrays.asList(cityWeathers));
         binding.hourlyRecyclerview.setAdapter(forecastingAdapter);
+
 
     }
 }

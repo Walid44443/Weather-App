@@ -6,12 +6,13 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.walid.weather.data.model.response.CityWeather;
 import com.walid.weather.databinding.ItemHourForecastingForTodayLayoutBinding;
-import com.walid.weather.databinding.ItemNextForecastingLayoutBinding;
-import com.walid.weather.databinding.ItemTodayForecastingLayoutBinding;
+import com.walid.weather.util.UiHelper;
 
 import java.util.List;
+import java.util.Objects;
 
 public class TodayForecastingAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private List<CityWeather> mDataSet;
@@ -50,7 +51,7 @@ public class TodayForecastingAdapter extends RecyclerView.Adapter<RecyclerView.V
     }
 
     class ForecastingViewHolder extends RecyclerView.ViewHolder {
-        private ItemHourForecastingForTodayLayoutBinding itemNextForecasting;
+        private final ItemHourForecastingForTodayLayoutBinding itemNextForecasting;
 
         public ForecastingViewHolder(ItemHourForecastingForTodayLayoutBinding itemNextForecasting) {
             super(itemNextForecasting.getRoot());
@@ -59,6 +60,15 @@ public class TodayForecastingAdapter extends RecyclerView.Adapter<RecyclerView.V
 
         protected void bind(CityWeather cityWeather) {
             itemNextForecasting.setCityWeather(cityWeather);
+
+            Glide.with(itemNextForecasting.getRoot().getContext()).load(
+                    UiHelper.Companion
+                            .getWeatherIcon(
+                                    Objects.requireNonNull(
+                                            Objects.requireNonNull(cityWeather.getWeather()).get(0).getIcon()))
+            ).into(itemNextForecasting.descImgThisHour);
+
+
         }
     }
 }
